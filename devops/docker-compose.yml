@@ -1,0 +1,33 @@
+version: "3.1"
+services:
+
+  postgres:
+    image: postgres:14.7
+    #restart: always
+    logging:
+      options:
+        max-size: "10m"
+    container_name: postgres
+    volumes:
+      - ${POSTGRES_VOLUME_DATA}:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+
+  api.petpassport:
+    image: ${DOCKER_HUB_USERNAME}/${DOCKER_HUB_IMAGE}:api.petpassport
+    logging:
+      options:
+        max-size: "10m"
+    container_name: api.petpassport
+    volumes:
+      - /home/data/user-files:/user-files
+    #restart: always
+    depends_on:
+      - postgres
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env

@@ -1,0 +1,57 @@
+server:
+  port: 8000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+spring:
+  application:
+    name: pet-passport
+
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:5432/petpassport
+    username: ${POSTGRES_USERNAME:root}
+    password: ${POSTGRES_PASSWORD:root}
+
+  jpa:
+    generate-ddl: false
+    database-platform: org.hibernate.dialect.PostgresPlusDialect
+    open-in-view: false
+
+  liquibase:
+    change-log: classpath:db-migrations/changelog.xml
+    enabled: true
+    drop-first: false
+
+  main:
+    allow-circular-references: true
+
+  security:
+    user:
+      name: ${API_SECURITY_USER:admin}
+      password: ${API_SECURITY_PASSWORD:admin}
+
+  mail:
+    host: mail.your-server.de
+    port: 587
+    username: ${MAIL_USERNAME:username}
+    password: ${MAIL_PASSWORD:password}
+    protocol: smtp
+    properties:
+      "mail.transport.protocol": smtp
+      "mail.smtp.auth": true
+      "mail.smtp.starttls.enable": true
+
+logging:
+  level:
+    org:
+      springframework: info
+      boot:
+        autoconfigure: ERROR
+
+jwt:
+  secret: ${JWT_SECRET:local_secret}
+  valid: 604800000

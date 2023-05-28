@@ -10,6 +10,6 @@ import java.util.UUID;
 @Repository
 public interface ChatRepository extends JpaRepository<ChatEntity, UUID> {
 
-    Page<ChatEntity> findAllByNameStartingWith(String name, Pageable pageable);
+    Page<ChatEntity> findAllByNameContaining(String name, Pageable pageable);
 
 }

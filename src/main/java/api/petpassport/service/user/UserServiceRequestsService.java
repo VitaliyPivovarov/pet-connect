@@ -52,7 +52,7 @@ public class UserServiceRequestsService {
         userServiceRequestsEntity = userServiceRequestsRepository.save(userServiceRequestsEntity);
         emailNotificationService.sendEmail(userServicesEntity.getUser().getEmail(),
                 "У вас новая заявка на услугу",
-                "Уважаемый " + userServiceRequestsEntity.getUser().getName() +
+                "Уважаемый " + userServicesEntity.getUser().getName() +
                         ", у Вас новая заявка от " + user.getName());
         notificationOutput.sendMessage(userServicesEntity.getUser().getId(),
                 new WsNotificationDto("Новая заявка",

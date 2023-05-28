@@ -33,7 +33,7 @@ public class UserServiceService {
     public Page<UserServicesEntity> search(PetTypeEnum petTypeEnum, String serviceType,
                                            final int page, final int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return userServicesRepository.findByServiceTypeLikeAndPetType(serviceType, petTypeEnum, pageable);
+        return userServicesRepository.findByServiceTypeStartingWithAndPetType(serviceType, petTypeEnum, pageable);
     }
 
     @Transactional

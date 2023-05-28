@@ -75,7 +75,7 @@ public class ChatService {
 
     public Page<ChatEntity> findAllChatByName(String name, final int page, final int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return chatRepository.findAllByNameLike(name, pageable);
+        return chatRepository.findAllByNameStartingWith(name, pageable);
     }
 
     public Page<ChatMessageEntity> findAllChatMessagesByChatId(UUID chatId, final int page, final int size) {
